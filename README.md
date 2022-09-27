@@ -64,3 +64,19 @@ Once downloaded move the `*.deb` file to `./pulse-secure-client/pulse.deb`.
 docker buildx build --tag ghcr.io/dadevel/pulse-secure-client:latest --tag ghcr.io/dadevel/pulse-secure-client:9.1r4 --label org.opencontainers.image.title=pulse-secure-client --label org.opencontainers.image.author=dadevel --label org.opencontainers.image.source=https://github.com/dadevel/docker-pulse-secure --label org.opencontainers.image.created=$(date +%Y-%m-%dT%H:%M:%SZ) --label org.opencontainers.image.version=9.1r4 --push ./pulse-secure-client/
 docker buildx build --tag ghcr.io/dadevel/openssh-proxy:latest --label org.opencontainers.image.title=openssh-proxy --label org.opencontainers.image.author=dadevel --label org.opencontainers.image.source=https://github.com/dadevel/docker-pulse-secure --label org.opencontainers.image.created=$(date +%Y-%m-%dT%H:%M:%SZ) --push ./openssh-proxy/
 ~~~
+
+# Using `docker-compose`
+
+1. Edit the `bootstrap.sh`
+
+```shell
+export VPN_URL=https://example.com
+
+# If using on WSL and Docker for Desktop with a X11 server like 'marha.VcXsrv' installed 
+# and set display number to 0 on Windows, you can use this default value.
+export DISPLAY=host.docker.internal:0.0
+```
+
+2. Run **install-x11-server-win.sh** if you are using **Windows** and **Docker for Desktop**.
+
+3. Execute **bootstrap.sh** to start.
