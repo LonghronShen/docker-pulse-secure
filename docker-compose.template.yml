@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  pulse-client:
+    image: ghcr.io/dadevel/pulse-secure-client:latest
+    build:
+      context: ./pulse-secure-client
+    container_name: "pulse-client"
+    # restart: always
+    privileged: true
+    devices:
+      - "/dev/net/tun"
+    cap_add:
+      - "net_admin"
+      - "sys_admin"
+    environment:
+      - DISPLAY=$DISPLAY
+      # - USER_ID=$USER_ID
+      # - GROUP_ID=$GROUP_ID
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./connections.txt:/data/.pulse_secure/pulse/.pulse_Connections.txt
+
+  pulse-proxy:
+    image: ghcr.io/dadevel/openssh-proxy:latest
+    build:
+      context: ./openssh-proxy
+    container_name: "pulse-proxy"
+    # restart: always
+    privileged: true
+    networks:
+      default:
+        ipv4_address: 172.31.255.2
+
+networks:
+  default:
+    name: pulse_internal
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.255.0/24
