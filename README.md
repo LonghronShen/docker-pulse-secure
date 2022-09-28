@@ -67,14 +67,27 @@ docker buildx build --tag ghcr.io/dadevel/openssh-proxy:latest --label org.openc
 
 # Using `docker-compose`
 
-1. Edit the `bootstrap.sh`
+## Prerequisites
+
+1. **Docker** or **Docker for Desktop** installed
+2. Linux with **gettext** installed
+
+## Configuration and usage
+
+1. Edit the **bootstrap.sh**
 
 ```shell
+# Replace this with the actucal VPN URL.
 export VPN_URL=https://example.com
 
 # If using on WSL and Docker for Desktop with a X11 server like 'marha.VcXsrv' installed 
 # and set display number to 0 on Windows, you can use this default value.
 export DISPLAY=host.docker.internal:0.0
+
+...
+
+# Add --build argument to build in place.
+# docker-compose up --build
 ```
 
 2. Run **install-x11-server-win.sh** if you are using **Windows** and **Docker for Desktop**.
