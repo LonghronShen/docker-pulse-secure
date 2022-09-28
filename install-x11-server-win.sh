@@ -6,5 +6,5 @@ echo "Remeber to enable 'Allow Public Access' and set Display number as 0."
 
 read -t 10 -n 1 -p "Ready to install marha.VcXsrv (y/n)? " answer
 if [[ -z "$answer" ]]; then
-    ehco "winget install marha.VcXsrv"
+    winget install marha.VcXsrv
 fi
